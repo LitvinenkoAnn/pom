@@ -1,13 +1,16 @@
-const path = require("path")
+const path = require('path'); 
+
 exports.config = {
+
+    // services: ['chromedriver'],
+    
     //
     // ====================
     // Runner Configuration
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
-    path:"/wd/hub",
-    port: 4723,
+    port: 4725,
     //
     // ==================
     // Specify Test Files
@@ -23,8 +26,10 @@ exports.config = {
     // The path of the spec files will be resolved relative from the directory of
     // of the config file unless it's absolute.
     //
+
     specs: [
-        './tests/specs/**/*.js',
+        './tests/*.spec.js'
+        // ToDo: define location for spec files here
     ],
     // Patterns to exclude.
     exclude: [
@@ -53,13 +58,12 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        // capabilities for local Appium web tests on an Android Emulator
-        'appium:deviceName': 'Pixel_5',
-        "appium:udid": "emulator-5554",
-        "platformName": "Android",
-        "appium:app": path.join(process.cwd(), "./android/ApiDemos-debug.apk")
+        platformName: 'Android',
+        'appium:deviceName': 'emulator-5554', // Имя эмулятора
+        'appium:platformVersion': '14.0', // Версия Android
+        'appium:automationName': 'UiAutomator2',
+        "appium:app": path.join(process.cwd(), "./android/ApiDemos-debug.apk") // Путь к вашему APK-файлу
     }],
-
     //
     // ===================
     // Test Configurations
@@ -108,6 +112,7 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['appium'],
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
